@@ -1,0 +1,2 @@
+# Introduction
+This repo contains [Trivy](https://github.com/aquasecurity/trivy/) scan reports for some popular docker hub and gcr images. The exact list can be found in this [file](https://github.com/AppThreat/hub_scan/blob/master/image-list.txt). Using a GitHub [action](https://github.com/AppThreat/hub_scan/blob/master/.github/workflows/trivy_scan.yml), scans are performed periodically and the reports get updated in the master branch automatically.

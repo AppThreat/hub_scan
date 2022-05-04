@@ -1,0 +1,6 @@
+steps:
+- name: gcr.io/cloud-builders/gsutil
+  args: ['-m', 'cp', 'reports/*.json', 'gs://hub_reports/']
+- name: gcr.io/$PROJECT_ID/bq
+  args: ['load', '--replace', '--ignore_unknown_values', '--autodetect', '--source_format=NEWLINE_DELIMITED_JSON', 'hub_reports.hub_reports', 'gs://hub_reports/full-report.json']
+timeout: 1200s

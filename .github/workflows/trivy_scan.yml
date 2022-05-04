@@ -1,0 +1,30 @@
+name: Trivy_Scan
+
+on:
+  push:
+    branches:
+    - release/*
+  schedule:
+  - cron: "0 */4 * * *"       
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1    
+    - name: Run trivy scan
+      run: |
+        sh trivy_scan.sh      
+    - name: Push to master
+      uses: tcitry/push-to-master@v1.0
+      with:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        # Artifact name
+        name: "Trivy_reports"
+        # Directory containing files to upload
+        path: "reports"  
